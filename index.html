@@ -2,23 +2,29 @@
 <script src="https://unpkg.com/ohm-js@17/dist/ohm.js"></script>
 <script src="js/test.js"></script>
 
-<p id="p1"></p>
-Test
+<p>
+    <canvas id="canvas"></canvas>
+</p>
+<p>
+    <input id="input"></input>
+</p>
+<p>
+    <button id="update">Update</button>
+</p>
+<p>
+    <textarea id="message"></textarea>
+</p>
+
 
 <script>
-  function addTextNode(text) {
-  const newText = document.createTextNode(text);
-  const p1 = document.getElementById("p1");
+    var updateButton = document.getElementById("update");
 
-  p1.appendChild(newText);
-}
+    function updateCanvas() {
+        console.log("Clicked");
+        text = document.getElementById("input").value;
+        console.log(text);
+        document.getElementById("message").innerText = text;
+    }
 
-addTextNode("TEST")
-console.log("Here");
-    const myGrammar = ohm.grammar(String.raw`
-  MyGrammar {
-    greeting = "Hello" | "Hola"
-  }
-`);
-
+    updateButton.addEventListener("click", updateCanvas);
 </script>
