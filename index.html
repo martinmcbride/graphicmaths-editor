@@ -1,0 +1,24 @@
+<!-- Development version of Ohm from unpkg.com -->
+<script src="https://unpkg.com/ohm-js@17/dist/ohm.js"></script>
+<script src="js/test.js"></script>
+
+<p id="p1"></p>
+Test
+
+<script>
+  function addTextNode(text) {
+  const newText = document.createTextNode(text);
+  const p1 = document.getElementById("p1");
+
+  p1.appendChild(newText);
+}
+
+addTextNode("TEST")
+console.log("Here");
+    const myGrammar = ohm.grammar(String.raw`
+  MyGrammar {
+    greeting = "Hello" | "Hola"
+  }
+`);
+
+</script>
