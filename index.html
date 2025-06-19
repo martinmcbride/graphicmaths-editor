@@ -1,6 +1,6 @@
 <!-- Development version of Ohm from unpkg.com -->
 <script src="https://unpkg.com/ohm-js@17/dist/ohm.js"></script>
-<script src="js/test.js"></script>
+<script src="js/graphicmaths-editor.js"></script>
 
 <p>
     <canvas id="canvas"></canvas>
@@ -18,12 +18,15 @@
 
 <script>
     var updateButton = document.getElementById("update");
-
     function updateCanvas() {
         console.log("Clicked");
-        text = document.getElementById("input").value;
-        console.log(text);
-        document.getElementById("message").innerText = text;
+        const userInput = document.getElementById("input").value;
+        const m = myGrammar.match(userInput);
+        if (m.succeeded()) {
+          console.log('Greetings, human.');
+        } else {
+          console.log("That's not a greeting!");
+        }
     }
 
     updateButton.addEventListener("click", updateCanvas);
