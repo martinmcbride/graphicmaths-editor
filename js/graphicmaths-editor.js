@@ -27,6 +27,7 @@ const source = String.raw`
       = "(" Exp ")"  -- paren
       | "+" PriExp   -- pos
       | "-" PriExp   -- neg
+      | ident "(" ListOf<Exp, ","> ")"   --call
       | ident
       | number
 
@@ -94,6 +95,14 @@ semantics.addOperation(
       PriExp_paren(_l, e, _r) { return e.interpret(); },
       PriExp_pos(_, e)        { return e.interpret(); },
       PriExp_neg(_, e)        { return -e.interpret(); },
+      PriExp_call(id, _open, exps, _close){
+        const entity = memory[id.sourceString]
+        //must(entity !== undefined, `${id.sourceString} not defined`, id)
+        //must(entity?.type === "FUNC", "Function expected", id)
+        const args = exps.asIteration().children.map(e => e.interpret())
+        //must(args.length === entity?.paramCount, "Wrong number of arguments", exps)
+        return entity.fun(...args)
+      },
 
       ident(_l, _ns) {
         // Look up the value of a constant, e.g., 'pi' or variable
