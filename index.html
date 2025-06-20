@@ -21,11 +21,14 @@
     function updateCanvas() {
         console.log("Clicked");
         const userInput = document.getElementById("input").value;
-        const m = myGrammar.match(userInput);
+        const m = g.match(userInput);
         if (m.succeeded()) {
-          console.log('Greetings, human.');
+          console.log("Valid expression");
+          n = s(m)
+          v = n.interpret()
+          console.log(v);
         } else {
-          console.log("That's not a greeting!");
+          console.log("Invalid expression");
         }
     }
 
