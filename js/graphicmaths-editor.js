@@ -2,6 +2,11 @@ const source = String.raw`
   // An Ohm grammar for arithmetic expressions.
 
   Arithmetic {
+    Program = Statement+   -- statements
+            | Exp          -- exp
+
+    Statement = Exp ";"
+
     Exp
       = AssignExp
 
@@ -63,8 +68,22 @@ const semantics = grammar.createSemantics();
 semantics.addOperation(
     'interpret',
     {
+
+      Program_statements(statements) {
+        for (const statement of statements.children) x = statement.interpret()
+        return x;
+      },
+
+      Program_exp(e) {
+        return e.interpret();
+      },
+
+      Statement(e, _) {
+        return e.interpret();
+      },
+
       Exp(e) {
-        return e.interpret();  // Note that operations are accessed as methods on the CST nodes.
+        return e.interpret();
       },
 
       AssignExp(e) {
