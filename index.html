@@ -24,8 +24,8 @@
         const match = grammar.match(userInput);
         if (match.succeeded()) {
           console.log("Valid expression");
-          node = semantics(match)
-          value = node.interpret()
+          node = semantics(match);
+          value = node.interpret();
           console.log(value);
         } else {
           console.log("Invalid expression");
