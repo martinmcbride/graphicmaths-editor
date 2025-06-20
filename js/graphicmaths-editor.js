@@ -45,7 +45,7 @@ const source = String.raw`
 `;
 
 // We use `ohm.grammar` instantiate our Grammar from the source.
-const g = ohm.grammar(source);
+const grammar = ohm.grammar(source);
 
 
 /*
@@ -71,9 +71,6 @@ const g = ohm.grammar(source);
 
   Because `PriExp` is a syntactic rule, it matches "spacey" inputs like the following example:
 */
-
-g.match(' (  \t123   ) ', 'PriExp').succeeded();  // evaluates to `true`
-
 /*
   Note that you can optionally specify a "start rule" of a match by passing its name as the 2nd
   argument to the `match` method, as shown above. When you don't specify a start rule, `match()`
@@ -108,7 +105,7 @@ g.match(' (  \t123   ) ', 'PriExp').succeeded();  // evaluates to `true`
   Below, we create a new semantics `s` for our arithmetic grammar.
 */
 
-const s = g.createSemantics();
+const semantics = grammar.createSemantics();
 
 /*
   But a semantics without any operations or attributes is not very interesting: it doesn't do
@@ -118,7 +115,7 @@ const s = g.createSemantics();
 
 const constants = {pi: Math.PI, e: Math.E};
 
-s.addOperation(
+semantics.addOperation(
     'interpret',
     /*
       When you create an operation, you have to specify what it does for each rule in the grammar.
